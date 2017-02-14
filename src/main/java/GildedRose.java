@@ -26,7 +26,7 @@ public class GildedRose {
 }
 
     public static List<Item> getItems() {
-	    return items;
+        return items;
     }
 
 	
@@ -40,6 +40,9 @@ public class GildedRose {
                 {
                     if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
                     {
+                        if ("Conjured Mana Cake".equals(items.get(i).getName())) {
+                            items.get(i).setQuality(items.get(i).getQuality() - 1);
+                        }
                         items.get(i).setQuality(items.get(i).getQuality() - 1);
                     }
                 }
