@@ -22,8 +22,12 @@ public class GildedRose {
         items.add(new Item("Conjured Mana Cake", 3, 6));
 
         updateQuality();
+
 }
 
+    public static List<Item> getItems() {
+	    return items;
+    }
 
 	
     public static void updateQuality()
