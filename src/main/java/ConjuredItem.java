@@ -1,7 +1,4 @@
-/**
- * Created by christoph on 14/02/2017.
- */
-public class ConjuredItem extends Item {
+public class ConjuredItem extends StockableItem {
 
 
 
@@ -9,6 +6,7 @@ public class ConjuredItem extends Item {
         super(name, sellIn, quality);
     }
 
+    @Override
     public void age() {
         if (getQuality() > 0) {
             if (getSellIn() < 0) {

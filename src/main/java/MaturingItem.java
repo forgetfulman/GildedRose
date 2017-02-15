@@ -1,7 +1,4 @@
-/**
- * Created by christoph on 14/02/2017.
- */
-public class MaturingItem extends Item {
+public class MaturingItem extends StockableItem {
 
 
 
@@ -9,6 +6,7 @@ public class MaturingItem extends Item {
         super(name, sellIn, quality);
     }
 
+    @Override
     public void age() {
         if (getQuality() < 50) {
             if (getSellIn() < 0) {

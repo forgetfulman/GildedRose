@@ -1,7 +1,4 @@
-/**
- * Created by christoph on 14/02/2017.
- */
-public class ExpiringMaturingItem extends Item {
+public class ExpiringMaturingItem extends StockableItem {
 
     private static int IN_DEMAND = 10;
     private static int SELLING_LIKE_HOT_CAKES = 5;
@@ -10,6 +7,7 @@ public class ExpiringMaturingItem extends Item {
         super(name, sellIn, quality);
     }
 
+    @Override
     public void age() {
         if (getSellIn() >= 0) {
             if (getQuality() < 50) {

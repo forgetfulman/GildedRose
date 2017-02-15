@@ -1,7 +1,4 @@
-/**
- * Created by christoph on 14/02/2017.
- */
-public class LegendaryItem extends Item {
+public class LegendaryItem extends StockableItem {
 
 
 
@@ -9,6 +6,7 @@ public class LegendaryItem extends Item {
         super(name, sellIn, quality);
     }
 
+    @Override
     public void age() {}
 
 }
