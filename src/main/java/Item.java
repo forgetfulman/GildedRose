@@ -1,32 +1,38 @@
-
 public class Item {
-    public String name;
-	public int sellIn; 
-    public int quality; 
+    private String name;
+    private int sellIn;
+    private int quality;
+    private String itemType = "unknown";
     
     public Item(String name, int sellIn, int quality) {
-		this.setName(name);
-		this.setSellIn(sellIn);
-		this.setQuality(quality);
+		this.name = name;
+		this.sellIn = sellIn;
+		this.quality = quality;
 	}
+
+    public Item(String name, int sellIn, int quality, String itemType) {
+        this(name, sellIn, quality);
+        this.itemType = itemType;
+    }
+
+	public void age() {
+        sellIn--;
+    }
     
 	/* Generated getter and setter code */
     public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getSellIn() {
 		return sellIn;
-	}
-	public void setSellIn(int sellIn) {
-		this.sellIn = sellIn;
 	}
 	public int getQuality() {
 		return quality;
 	}
-	public void setQuality(int quality) {
-		this.quality = quality;
-	}
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
+    public String getItemType() {
+        return itemType;
+    }
 }
