@@ -14,7 +14,7 @@ public class Assessor {
         int itemMaxQuality = 0;
         try {
             Method ageingProfileProvider = getItemAgeingProfile(item.getItemType());
-            itemAgeingPhases = new ItemAgeingPhaseCollection((Stack<AgeingPhase>) ageingProfileProvider.invoke(new ItemAgingProfile(), item.getQuality()));
+            itemAgeingPhases = (ItemAgeingPhaseCollection) ageingProfileProvider.invoke(new ItemAgingProfile(), item.getQuality());
             AgingProfile ageingProfile = ageingProfileProvider.getAnnotation(AgingProfile.class);
             itemMaxQuality = ageingProfile.maxQuality();
         }

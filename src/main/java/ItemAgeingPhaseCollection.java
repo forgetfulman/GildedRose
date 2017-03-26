@@ -16,14 +16,14 @@ public class ItemAgeingPhaseCollection {
         int newItemQuality = item.getQuality() + currentAgeingPhase.getChangeRate();
 
         return isItemQualityInRange(newItemQuality, itemMaxQuality) ?
-                item.getQuality() + currentAgeingPhase.getChangeRate() : itemQualityBoundary(newItemQuality, itemMaxQuality);
+                item.getQuality() + currentAgeingPhase.getChangeRate() : tellMeItemLimitReached(newItemQuality, itemMaxQuality);
     }
 
     private boolean isItemQualityInRange(int newItemQuality, int itemMaxQuality) {
         return newItemQuality < itemMaxQuality && newItemQuality >= 0;
     }
 
-    private int itemQualityBoundary(int newItemQuality, int itemMaxQuality) {
+    private int tellMeItemLimitReached(int newItemQuality, int itemMaxQuality) {
         return newItemQuality < 0 ? 0 : itemMaxQuality;
     }
 
