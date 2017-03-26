@@ -10,24 +10,18 @@ import java.util.Stack;
 public class Assessor {
 
     public static int assessItemQuality(Item item) {
-        Stack<AgeingPhase> itemAgeingProfile = null;
+        ItemAgeingPhaseCollection itemAgeingPhases = null;
         int itemMaxQuality = 0;
         try {
             Method ageingProfileProvider = getItemAgeingProfile(item.getItemType());
-            itemAgeingProfile = (Stack<AgeingPhase>) ageingProfileProvider.invoke(new ItemAgingProfile(), item.getQuality());
+            itemAgeingPhases = new ItemAgeingPhaseCollection((Stack<AgeingPhase>) ageingProfileProvider.invoke(new ItemAgingProfile(), item.getQuality()));
             AgingProfile ageingProfile = ageingProfileProvider.getAnnotation(AgingProfile.class);
             itemMaxQuality = ageingProfile.maxQuality();
         }
         catch (Exception e) {
             System.out.println(e.toString());
         }
-
-        while (itemAgeingProfile.size() > 1 && itemAgeingProfile.peek().getSellIn() > item.getSellIn()) {
-            itemAgeingProfile.pop();
-        }
-
-        return calculateNewItemQuality(item.getQuality(), itemAgeingProfile.peek().getChangeRate()) > itemMaxQuality ?
-                itemMaxQuality : calculateNewItemQuality(item.getQuality(), itemAgeingProfile.peek().getChangeRate());
+        return itemAgeingPhases.tellMeThisItemsQuality(item, itemMaxQuality);
     }
 
     private static Method getItemAgeingProfile(String itemType) {
@@ -42,9 +36,5 @@ public class Assessor {
     private static Set<Method> getAgeingProfileProviders() {
         return ReflectionUtils.getAllMethods(ItemAgingProfile.class,
                 withModifier(Modifier.PUBLIC), withPrefix("getAgingProfile"), withAnnotation(AgingProfile.class));
-    }
-
-    private static int calculateNewItemQuality(int currentItemQuality, int changeRate) {
-        return currentItemQuality + changeRate < 0 ? 0 : currentItemQuality + changeRate;
     }
 }
