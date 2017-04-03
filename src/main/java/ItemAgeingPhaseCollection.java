@@ -13,18 +13,22 @@ public class ItemAgeingPhaseCollection {
             ageingPhases.pop();
         }
         AgeingPhase currentAgeingPhase = ageingPhases.peek();
-        int newItemQuality = item.getQuality() + currentAgeingPhase.getChangeRate();
+        int newItemQuality = determineNewItemQuality(item, currentAgeingPhase);
 
         return isItemQualityInRange(newItemQuality, itemMaxQuality) ?
-                item.getQuality() + currentAgeingPhase.getChangeRate() : tellMeItemLimitReached(newItemQuality, itemMaxQuality);
+                newItemQuality : tellMeWhichItemLimitReached(newItemQuality, itemMaxQuality);
     }
 
     private boolean isItemQualityInRange(int newItemQuality, int itemMaxQuality) {
         return newItemQuality < itemMaxQuality && newItemQuality >= 0;
     }
 
-    private int tellMeItemLimitReached(int newItemQuality, int itemMaxQuality) {
+    private int tellMeWhichItemLimitReached(int newItemQuality, int itemMaxQuality) {
         return newItemQuality < 0 ? 0 : itemMaxQuality;
+    }
+
+    private int determineNewItemQuality(Item item, AgeingPhase currentAgeingPhase) {
+        return item.getQuality() + currentAgeingPhase.getChangeRate();
     }
 
 }
